@@ -4,7 +4,7 @@ import React from "react";
 const Profil = () => {
   return (
     <div>
-      voici profil
+      <p>salut</p>
     </div>
   );
 };

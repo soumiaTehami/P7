@@ -1,22 +1,20 @@
 import React from "react";
-import { Routes} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
-
+import Home from "./pages/Home";
+import Profil from "./pages/Profil";
 
 const App = () => {
   return (
-    
-
-      
-        <div>
-         <Routes/>
-         
-          
-        </div>
-      
-  
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profil" element={<Profil />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-}
+};
 
 export default App;

@@ -18,7 +18,6 @@ exports.createPost = async (req, res, next) => {
         posterId: req.body.posterId,
         message: req.body.message,
         picture: req.file !== undefined ? `./uploads/` + req.file.filename : "",
-        video: req.body.video,
         likers: [],
         comments: [],
     });
