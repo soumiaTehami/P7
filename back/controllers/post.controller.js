@@ -32,25 +32,35 @@ exports.createPost = async (req, res, next) => {
 }
 
 exports.updatePost = (req, res, next) => {
-    if (!ObjectID.isValid(req.params.id)) {
-        return res.status(400).json('ID Unknown : ' + req.params.id);
-    } else {
-        const updatedRecord = {
-            message: req.body.message
-        }
-        PostModel.findByIdAndUpdate(
-            req.params.id,
-            { $set: updatedRecord },
-            { new: true },
-            (error, docs) => {
-                if (!error) {
-                    res.send(docs);
-                } else {
-                    console.log("Update error : " + error);
-                }
-            }
-        )
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  let updatedRecord = {};
+
+  if (req.file) {
+    updatedRecord = {
+      message: req.body.message,
+      picture: `../images/${req.file.filename}`,
+    };
+  } else {
+    updatedRecord = {
+      message: req.body.message,
+    };
+  }
+
+  PostModel.updateOne(
+    { _id: req.params.id },
+    {
+      $set: updatedRecord,
+    },
+    {
+      new: true,
+    },
+    (err, docs) => {
+      if (!err) res.send(docs);
+      else console.log("il y a une erreur" + err);
     }
+  );
 }
 
 exports.deletePost = (req, res, next) => {
