@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes} from 'react-router-dom';
+import Home from "./pages/Home"
 
 
 
@@ -10,7 +10,7 @@ const App = () => {
 
       
         <div>
-         <Routes/>
+         <Home/>
          
           
         </div>
