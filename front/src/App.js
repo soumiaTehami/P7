@@ -5,9 +5,11 @@ import "./styles/index.scss";
 import Home from "./pages/Home";
 import Profil from "./pages/Profil";
 
+
 const App = () => {
   return (
-    <div>
+    <div>  
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
