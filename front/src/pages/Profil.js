@@ -1,5 +1,4 @@
 import React from "react";
-import Log from "../components/Log";
 import Navbar from "../components/Navbar";
 
 
@@ -10,8 +9,8 @@ const Profil = () => {
      
         <div className="log-container">
         <Navbar />
-          <Log/>
-          <img src="./img/icon-left-font.svg" alt="img-log" />
+          
+        salut
           </div>
       
     </div>
