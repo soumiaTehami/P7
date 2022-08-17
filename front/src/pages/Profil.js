@@ -1,10 +1,18 @@
 import React from "react";
+import Log from "../components/Log";
+
+
 
 
 const Profil = () => {
   return (
-    <div>
-      <p>salut</p>
+    <div className="profil-page">
+      
+        <div className="log-container">
+          <Log/>
+          <img src="./img/icon-left-font.svg" alt="img-log" />
+          </div>
+      
     </div>
   );
 };
