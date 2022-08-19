@@ -11,6 +11,7 @@ const Profil = () => {
         <Navbar />
           
         
+        
           </div>
       
     </div>
