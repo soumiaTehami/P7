@@ -17,7 +17,8 @@ exports.createPost = async (req, res, next) => {
     const newPost = new PostModel( {
         posterId: req.body.posterId,
         message: req.body.message,
-        picture: req.file !== undefined ? `./uploads/` + req.file.filename : "",
+        picture: req.file !== undefined ?  `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`: "",
+        video: req.body.video,
         likers: [],
         comments: [],
     });
@@ -32,35 +33,29 @@ exports.createPost = async (req, res, next) => {
 }
 
 exports.updatePost = (req, res, next) => {
-    if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-  let updatedRecord = {};
-
-  if (req.file) {
-    updatedRecord = {
-      message: req.body.message,
-      picture: `../images/${req.file.filename}`,
-    };
-  } else {
-    updatedRecord = {
-      message: req.body.message,
-    };
-  }
-
-  PostModel.updateOne(
-    { _id: req.params.id },
-    {
-      $set: updatedRecord,
-    },
-    {
-      new: true,
-    },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("il y a une erreur" + err);
+    if (!ObjectID.isValid(req.params.id)) {
+        return res.status(400).json('ID Unknown : ' + req.params.id);
+    } else {
+        const updatedRecord = {};
+        if (req.body.message && req.body.message !== "null") {
+            updatedRecord.message = req.body.message
+        };
+        if (req.file) {
+            updatedRecord.picture = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+        };
+        PostModel.findByIdAndUpdate(
+            req.params.id,
+            { $set: updatedRecord },
+            { new: true },
+            (error, docs) => {
+                if (!error) {
+                    res.send(docs);
+                } else {
+                    console.log("Update error : " + error);
+                }
+            }
+        )
     }
-  );
 }
 
 exports.deletePost = (req, res, next) => {
