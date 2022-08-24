@@ -37,7 +37,9 @@ exports.updatePost = (req, res, next) => {
         return res.status(400).json('ID Unknown : ' + req.params.id);
     } else {
         const updatedRecord = {
-            message: req.body.message
+            message: req.body.message,
+            picture: req.file !== undefined ? `./uploads/` + req.file.filename : "",
+        
         }
         PostModel.findByIdAndUpdate(
             req.params.id,
