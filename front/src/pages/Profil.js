@@ -1,19 +1,21 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import React, { useContext } from "react";
+import Log from "../components/Log";
+import { UidContext } from "../components/AppContext";
 import UpdateProfil from "../components/Profil/UpdateProfil";
 
-
 const Profil = () => {
+  const uid = useContext(UidContext);
+
   return (
     <div className="profil-page">
-     <UpdateProfil />
+      {uid ? (
+        <UpdateProfil />
+      ) : (
         <div className="log-container">
-        <Navbar />
-          
-        
-        
+          <Log signin={false} signup={true} />
+          <img src="./img/icon-left-font.svg" alt="img-log" />
           </div>
-      
+      )}
     </div>
   );
 };

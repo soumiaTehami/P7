@@ -1,10 +1,10 @@
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
-const filesDestination = `${__dirname}/../uploads`;
+const filesDestination = `${__dirname}/../../front/client/public/uploads`;
 
 exports.getAllUsers = async (req, res) => {
-  const users = await UserModel.find().select("-password -email");
+  const users = await UserModel.find().select("-password");
   res.status(200).json(users);
 };
 
@@ -15,27 +15,26 @@ exports.getOneUser = (req, res) => {
   UserModel.findById(req.params.id, (err, docs) => {
     if (!err) res.send(docs);
     else console.log("ID unknown : " + err);
-  }).select("-password -email");
+  }).select("-password");
 };
 exports.uploadProfil = async (req, res) => {
+  const fileName = req.body.name + ".jpg";
   try {
-    await UserModel.findByIdAndUpdate(
+    if (fs.existsSync(filesDestination)) {
+      fs.unlink(fileName, (err) => {
+        if(err) console.log(err);
+      });}
+      await UserModel.findByIdAndUpdate(
       req.body.userId,
-      {
-        $set: {
-          picture: `${req.protocol}://${req.get("host")}/uploads/${
-            req.file.filename
-          }`,
-        },
-      },
-      { new: true, upsert: true, setDefaultsOnInsert: true }
-    )
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
+      { $set: { picture: req.file !== undefined ? `./uploads/` + req.file.filename : "" } },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
+    );
+    
   } catch (err) {
     return res.status(500).send({ message: err });
   }
-}
+};
+
 exports.updateUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);

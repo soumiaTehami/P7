@@ -1,20 +1,30 @@
-import React from "react";
-//import Card from "../components/Post/Card"
+import React, { useContext } from "react";
 import Log from "../components/Log";
-import Navbar from "../components/Navbar";
+import Thread from "../components/Thread";
+import { UidContext } from "../components/AppContext";
+
 
 const Home = () => {
+const uid = useContext(UidContext);
+
   return (
     <div className="home">
       <div className="main">
-        <div className="home-header">
-          <Navbar />
-          <div className="home-header">
-            <Log signin={false} signup={true} />
-          
-            <img src="./img/icon-left-font.svg" alt="img-log" />
-          </div>
+      {uid ? (
+        <div>
+          <div>
+        
         </div>
+        <div> 
+        <Thread />
+        </div>
+      </div>
+      ) : (
+        <div className="home-header">
+          <Log signin={false} signup={true} />
+          <img src="./img/icon-left-font.svg" alt="img-log" />
+        </div>
+      )}
       </div>
     </div>
   );
