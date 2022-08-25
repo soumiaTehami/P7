@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
 import { updatePost } from "../../actions/post.actions";
+import LikeButton from "./LikeButton";
 
 
 const Card = ({ post }) => {
@@ -114,7 +115,7 @@ const Card = ({ post }) => {
                 />
                 <span>{post.comments.length}</span> 
               </div>
-            
+              <LikeButton post={post} />
             </div>
             
           </div>
