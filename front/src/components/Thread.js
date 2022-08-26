@@ -19,7 +19,7 @@ const Thread = () => {
 
   useEffect(() => {
     if (loadPost) {
-      dispatch(getPosts(count));// affiché 5 post 
+      dispatch(getPosts(count));
       setLoadPost(false);
       setCount(count + 5);
     }
@@ -32,7 +32,7 @@ const Thread = () => {
     <div className="thread-container">
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-            return <Card post={post} key={post._id} />;//récuperer tout les card avec clé unique
+            return <Card post={post} key={post._id} />;
           })}
     </div>
   );

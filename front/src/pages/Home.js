@@ -3,7 +3,6 @@ import Log from "../components/Log";
 import Thread from "../components/Thread";
 import { UidContext } from "../components/AppContext";
 
-
 const Home = () => {
 const uid = useContext(UidContext);
 
