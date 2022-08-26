@@ -19,7 +19,7 @@ const Thread = () => {
 
   useEffect(() => {
     if (loadPost) {
-      dispatch(getPosts(count));
+      dispatch(getPosts(count));// affiché 5 post 
       setLoadPost(false);
       setCount(count + 5);
     }
