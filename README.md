@@ -3,7 +3,6 @@
 
 Télécharger le repo :
 
-```
 git clone https://https://github.com/soumiaTehami/P7
 
 
