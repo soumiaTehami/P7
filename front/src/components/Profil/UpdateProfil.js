@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
-import { updateBio } from "../../actions/user.actions";
+import { updateBio,deleteUser } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
+import cookie from "js-cookie";
 
 const UpdateProfil = () => {
   const [bio, setBio] = useState("");
@@ -15,6 +16,12 @@ const UpdateProfil = () => {
     dispatch(updateBio(userData._id, bio));
     setUpdateForm(false);
   };
+  const handledelete = () => {
+    dispatch(deleteUser(userData._id));
+    cookie.remove("jwt", { expires: 1 });
+    window.location = "/"
+  };
+
 
   return (
     <div className="profil-container">
@@ -46,10 +53,12 @@ const UpdateProfil = () => {
                   onChange={(e) => setBio(e.target.value)}
                 ></textarea>
                 <button onClick={handleUpdate}>Valider modifications</button>
+             
               </>
             )}
           </div>
           <h4>Membre depuis le : {dateParser(userData.createdAt)}</h4>
+          <button onClick={ handledelete}>Supprimer</button>
           </div>
         </div>
     </div>

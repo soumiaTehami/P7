@@ -1,4 +1,5 @@
 import {
+  DELETE,
     GET_USER,
     UPDATE_BIO,
     UPLOAD_PICTURE,
@@ -20,6 +21,8 @@ import {
           ...state,
           bio: action.payload,
         };
+        case DELETE:
+        return action.payload;
       default:
         return state;
     }
