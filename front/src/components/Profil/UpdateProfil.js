@@ -19,9 +19,7 @@ const UpdateProfil = () => {
   const handledelete = () => {
     dispatch(deleteUser(userData._id));
     cookie.remove("jwt", { expires: 1 });
-    window.location = "/"
   };
-
 
   return (
     <div className="profil-container">
@@ -53,16 +51,18 @@ const UpdateProfil = () => {
                   onChange={(e) => setBio(e.target.value)}
                 ></textarea>
                 <button onClick={handleUpdate}>Valider modifications</button>
-             
               </>
             )}
           </div>
-          <h4>Membre depuis le : {dateParser(userData.createdAt)}</h4>
           <button onClick={ handledelete}>Supprimer</button>
+          <h4>Membre depuis le : {dateParser(userData.createdAt)}</h4>
+         
           </div>
         </div>
     </div>
+    
   );
+  
 };
 
 export default UpdateProfil;
